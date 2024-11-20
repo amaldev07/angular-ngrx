@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 
   addItem() {
     const newItem = { id: Math.random(), name: 'New Item' };
-    this.store.dispatch(ItemActions.addItem({ item: newItem }));
+    // this.store.dispatch(ItemActions.addItem({ item: newItem }));
   }
 
   // deleteItem(id: number) {

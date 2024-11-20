@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { Actions, ofType } from '@ngrx/effects';
+import { createEffect } from '@ngrx/effects';
+import { map, mergeMap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as ItemActions from './item.actions';
 import { ItemService } from './item.service';
@@ -12,24 +13,34 @@ export class ItemEffects {
     loadItems$ = createEffect(() =>
         this.actions$.pipe(
             ofType(ItemActions.loadItems),
-            mergeMap(() =>
-                this.itemService.getItems().pipe(
-                    map((items) => ItemActions.loadItemsSuccess({ items })),
-                    catchError((error) => of(ItemActions.loadItemsFailure({ error: error.message })))
-                )
-            )
+            mergeMap(() => {
+                console.log('LoadItems action received');
+                return this.itemService.getItems().pipe(
+                    map((items) => {
+                        console.log('Items loaded successfully:', items);
+                        return ItemActions.loadItemsSuccess({ items });
+                    }),
+                    catchError((error) => {
+                        console.error('Error loading items:', error);
+                        return of(ItemActions.loadItemsFailure({ error: error.message }));
+                    })
+                );
+            })
         )
     );
 
-    addItem$ = createEffect(() =>
-        this.actions$.pipe(
-            ofType(ItemActions.addItem),
-            mergeMap((action) =>
-                this.itemService.addItem(action.item).pipe(
-                    map((item) => ItemActions.addItemSuccess({ item })),
-                    catchError((error) => of(ItemActions.addItemFailure({ error: error.message })))
-                )
-            )
-        )
-    );
+
+    // addItem$ = createEffect(() =>
+    //     this.actions$.pipe(
+    //         ofType(ItemActions.addItem), // Listens for the addItem action
+    //         mergeMap((action) =>
+    //             this.itemService.addItem(action.item).pipe( // Calls addItem from ItemService
+    //                 map((item) => ItemActions.addItemSuccess({ item })), // Dispatches addItemSuccess
+    //                 catchError((error) =>
+    //                     of(ItemActions.addItemFailure({ error: error.message }))
+    //                 )
+    //             )
+    //         )
+    //     )
+    // );
 }

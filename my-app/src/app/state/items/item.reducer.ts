@@ -13,7 +13,7 @@ export const itemsReducer = createReducer(
     on(ItemActions.loadItems, (state) => ({ ...state, loading: true })),
     on(ItemActions.loadItemsSuccess, (state, { items }) => ({ ...state, items, loading: false })),
     on(ItemActions.loadItemsFailure, (state, { error }) => ({ ...state, loading: false, error })),
-    on(ItemActions.addItemSuccess, (state, { item }) => ({ ...state, items: [...state.items, item] })),
+    // on(ItemActions.addItemSuccess, (state, { item }) => ({ ...state, items: [...state.items, item] })),
     
    /*  on(ItemActions.deleteItemSuccess, (state, { itemId }) => ({
         ...state,

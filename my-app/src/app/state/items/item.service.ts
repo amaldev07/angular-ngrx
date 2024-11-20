@@ -13,18 +13,18 @@ export class ItemService {
 
   // Fetch all items
   getItems(): Observable<Item[]> {
-    return this.http.get<Item[]>(this.baseUrl);
+    return this.http.get<any[]>(this.baseUrl);
   }
 
-  // Add a new item
-  addItem(item: Item): Observable<Item> {
-    return this.http.post<Item>(this.baseUrl, item);
-  }
+//   // Add a new item
+//   addItem(item: Item): Observable<Item> {
+//     return this.http.post<Item>(this.baseUrl, item);
+//   }
 
-  // Update an existing item
-  updateItem(item: Item): Observable<Item> {
-    return this.http.put<Item>(`${this.baseUrl}/${item.id}`, item);
-  }
+//   // Update an existing item
+//   updateItem(item: Item): Observable<Item> {
+//     return this.http.put<Item>(`${this.baseUrl}/${item.id}`, item);
+//   }
 
   // Delete an item
 //   deleteItem(id: number): Observable<void> {
