@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from './models/user.model';
+import { delay } from 'rxjs/operators'; // Import delay operator
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,6 @@ export class UserService {
   ];
 
   getUsers(): Observable<User[]> {
-    return of(this.users); // Simulating an API response
+    return of(this.users).pipe(delay(2000));
   }
 }

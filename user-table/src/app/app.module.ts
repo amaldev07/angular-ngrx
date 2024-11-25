@@ -9,6 +9,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { userReducer } from './store/user/user.reducer';
+import { HttpClientModule } from '@angular/common/http';
+import { UserEffects } from './store/user/user.effects';
 
 @NgModule({
   declarations: [
@@ -19,8 +21,10 @@ import { userReducer } from './store/user/user.reducer';
     BrowserModule,
     AppRoutingModule,
     MatTableModule,
+    HttpClientModule,
     StoreModule.forRoot({ userState: userReducer }), // Register the reducer
     // EffectsModule.forRoot([]),
+    EffectsModule.forRoot([UserEffects]), // Register effects
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [],

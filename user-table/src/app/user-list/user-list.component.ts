@@ -47,7 +47,7 @@ export class UserListComponent implements OnInit {
       this.users = data;
     })
     this.store.dispatch(loadUsers());
-    const mockUsers: User[] = [
+  /*   const mockUsers: User[] = [
       { id: 1, name: 'John Doe', age: 25 },
       { id: 2, name: 'Jane Smith', age: 30 },
       { id: 3, name: 'Sam Wilson', age: 20 },
@@ -55,6 +55,6 @@ export class UserListComponent implements OnInit {
     setTimeout(() => {
       this.store.dispatch(loadUsersSuccess({ users: mockUsers }));
 
-    }, 2000);
+    }, 2000); */
   }
 }
